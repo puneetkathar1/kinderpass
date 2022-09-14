@@ -1,6 +1,5 @@
 import React from 'react'
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Image from 'next/image'
 import Link2 from 'next/link'
 import CloseIcon from '@material-ui/icons/Close';
@@ -11,7 +10,6 @@ function Header() {
   const cookieuser = parseCookies()
   const user =  cookieuser.clientEmail 
   const [state2, toggleState2] = React.useState(1)
-  const [state3, toggleState3] = React.useState(1)
 
     return (
         <div>

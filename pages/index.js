@@ -90,16 +90,19 @@ export default function SignUp() {
       data.email.includes("@") &&
       data.password.length > 6
     ) {
-      const res = await fetch(`http://localhost:3000/api/signin`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password,
-        }),
-      });
+      const res = await fetch(
+        `https://kinderpass-assignment.vercel.app/api/signin`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: data.email,
+            password: data.password,
+          }),
+        }
+      );
 
       const res2 = await res.json();
       if (res2.error == "No User Found") {
@@ -140,7 +143,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login 
+            Login
           </Typography>
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
@@ -220,7 +223,7 @@ export async function getServerSideProps(ctx) {
     const cookies = new Cookies2(req, res);
     cookies.set("email");
     cookies.set("token");
-    cookies.set('clientEmail')
+    cookies.set("clientEmail");
     return {
       props: {},
     };

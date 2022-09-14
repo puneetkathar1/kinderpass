@@ -6,7 +6,6 @@ export default async (req, res) => {
   mongoose.connect(
     process.env.mongoDB,
     {
-      useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
@@ -16,7 +15,6 @@ export default async (req, res) => {
     }
   );
 
-  mongoose.set("useCreateIndex", true);
   const {
     managerEmail,
     empId,

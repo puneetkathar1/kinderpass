@@ -97,7 +97,7 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(data)
+    console.log(data);
     if (
       data.email.includes(".") &&
       data.email.includes("@") &&
@@ -107,22 +107,24 @@ export default function SignUp() {
       data.address.length > 6 &&
       data.company.length > 0
     ) {
-
-      const res = await fetch(`http://localhost:3000/api/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          fName: data.fName,
-          lName: data.lName,
-          email: data.email,
-          password: data.password,
-          dob: dob,
-          address: data.address,
-          company: data.company,
-        }),
-      });
+      const res = await fetch(
+        `https://kinderpass-assignment.vercel.app/api/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fName: data.fName,
+            lName: data.lName,
+            email: data.email,
+            password: data.password,
+            dob: dob,
+            address: data.address,
+            company: data.company,
+          }),
+        }
+      );
 
       const res2 = await res.json();
       console.log(res2);

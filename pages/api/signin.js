@@ -9,7 +9,6 @@ export default async (req, res) => {
   mongoose.connect(
     process.env.mongoDB,
     {
-      useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },

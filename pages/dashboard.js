@@ -23,7 +23,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-
 export default function SignUp({ email, res4 }) {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
@@ -50,16 +49,15 @@ export default function SignUp({ email, res4 }) {
             setOpen(true);
             //Setting up values of selected row into dialog box
             const newdata = { ...data };
-            newdata['empId'] = data.empId;
-            newdata['fName'] = data.fName;
-            newdata['lName'] = data.lName;
-            newdata['email'] = data.email;
-            newdata['address'] = data.address;
+            newdata["empId"] = data.empId;
+            newdata["fName"] = data.fName;
+            newdata["lName"] = data.lName;
+            newdata["email"] = data.email;
+            newdata["address"] = data.address;
             setDob(data.dob);
-            newdata['mobile'] = data.mobile;
-            newdata['city'] = data.city;
+            newdata["mobile"] = data.mobile;
+            newdata["city"] = data.city;
             setData(newdata);
-
           }}
           style={{
             backgroundColor: "green",
@@ -77,7 +75,7 @@ export default function SignUp({ email, res4 }) {
           onClick={(event) => {
             //Updating empId of selected row to delete
             const newdata = { ...data };
-            newdata['empId'] = data.empId;
+            newdata["empId"] = data.empId;
             deleteHandler(event);
           }}
           style={{
@@ -129,23 +127,26 @@ export default function SignUp({ email, res4 }) {
   //Fetch API for add/update employee
   const updateEmployee = async (e) => {
     e.preventDefault();
-    const result = await fetch(`http://localhost:3000/api/updateEmployee`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        managerEmail: email,
-        empId: data.empId,
-        fName: data.fName,
-        lName: data.lName,
-        email: data.email,
-        address: data.address,
-        dob: dob,
-        mobile: data.mobile,
-        city: data.city,
-      }),
-    });
+    const result = await fetch(
+      `https://kinderpass-assignment.vercel.app/api/updateEmployee`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          managerEmail: email,
+          empId: data.empId,
+          fName: data.fName,
+          lName: data.lName,
+          email: data.email,
+          address: data.address,
+          dob: dob,
+          mobile: data.mobile,
+          city: data.city,
+        }),
+      }
+    );
     const result2 = await result.json();
     if (result2) {
       router.reload();
@@ -155,16 +156,19 @@ export default function SignUp({ email, res4 }) {
   //Calling API for delete employee
   const deleteHandler = async (event) => {
     event.preventDefault();
-    const result = await fetch(`http://localhost:3000/api/deleteEmployee`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        managerEmail: email,
-        empId: data.empId
-      }),
-    });
+    const result = await fetch(
+      `https://kinderpass-assignment.vercel.app/api/deleteEmployee`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          managerEmail: email,
+          empId: data.empId,
+        }),
+      }
+    );
     const result2 = await result.json();
     if (result2) {
       router.reload();
@@ -202,8 +206,8 @@ export default function SignUp({ email, res4 }) {
         <Button
           onClick={(e) => {
             const newdata = { ...data };
-            newdata['empId'] = Number(res4[res4.length - 1].empId) + 1
-            setData(newdata)
+            newdata["empId"] = Number(res4[res4.length - 1].empId) + 1;
+            setData(newdata);
             setOpen(true);
           }}
           style={{ margin: "auto", display: "flex" }}
@@ -220,7 +224,7 @@ export default function SignUp({ email, res4 }) {
           <DialogTitle id="form-dialog-title">Add Employee</DialogTitle>
           <DialogContent>
             <>
-            <Grid item xs={12}>
+              <Grid item xs={12}>
                 <TextField
                   margin="dense"
                   id="empId"
@@ -344,15 +348,18 @@ export async function getServerSideProps(ctx) {
       },
     };
   } else {
-    const res3 = await fetch(`http://localhost:3000/api/getUser`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-      }),
-    });
+    const res3 = await fetch(
+      `https://kinderpass-assignment.vercel.app/api/getUser`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+        }),
+      }
+    );
     const res4 = await res3.json();
     return {
       props: { email, res4 },
